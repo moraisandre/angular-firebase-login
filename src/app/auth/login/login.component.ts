@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { auth } from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   loading = false;
 
   constructor(
-    public auth: AngularFireAuth,
+    public fireAuth: AngularFireAuth,
     private formBuilder: FormBuilder,
     private router: Router
   ) {}
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.errorMessage = null;
     this.loading = true;
 
-    this.auth
+    this.fireAuth
       .signInWithEmailAndPassword(form.email, form.password)
       .then(
         () => {
@@ -41,5 +42,11 @@ export class LoginComponent implements OnInit {
         }
       )
       .finally(() => (this.loading = false));
+  }
+
+  onLoginWithGoogle(): void {
+    this.fireAuth
+      .signInWithPopup(new auth.GoogleAuthProvider())
+      .then(() => this.router.navigate(['home']));
   }
 }
