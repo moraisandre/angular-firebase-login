@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "format": "prettier --write .",
+    "clean": "rimraf ./dist",
     "build:ci": "npm run clean && npm run build:prod"
   },
   "private": true,
