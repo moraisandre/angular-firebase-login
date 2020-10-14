@@ -7,5 +7,8 @@
         ]
       }
     }
+  },
+  "projects": {
+    "default": "angular-firebase-login-b521e"
   }
 }
