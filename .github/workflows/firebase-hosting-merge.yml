@@ -9,10 +9,41 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    strategy:
+    matrix:
+      node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
-      - run: ng build --prod
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Replace tokens
+        # You may pin to the exact commit or the version.
+        # uses: cschleiden/replace-tokens@121d9153eda2951d490e9f724a67ff095ab4c4f7
+        uses: cschleiden/replace-tokens@v1.0
+        with:
+          tokenSuffix: '}'
+          files: '["**/environment.prod.ts"]'
+        env:
+          apiKey: '${{ secrets.FIREBASE_API_KEY }}'
+          authDomain: '${{ secrets.FIREBASE_AUTH_DOMAIN }}'
+          databaseURL: '${{ secrets.FIREBASE_DB_URL }}'
+          projectId: 'angular-firebase-login-b521e'
+          storageBucket: '${{ secrets.FIREBASE_STORAGE_BUCKET }}'
+          messagingSenderId: '${{ secrets.FIREBASE_MSG_ID }}'
+          appId: '${{ secrets.FIREBASE_APP_ID }}'
+          measurementId: '${{ secrets.FIREBASE_MEASURE_ID }}'
+
+      - name: npm install and ng run build:ci
+        run: |
+          npm i  
+          npm run build:ci
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ANGULAR_FIREBASE_LOGIN_B521E }}'
