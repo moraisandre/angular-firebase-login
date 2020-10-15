@@ -1,27 +1,27 @@
-# AngularFirebaseLogin
+# Angular Firebase Login
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.6.
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/moraisandre/angular-firebase-login/Deploy%20to%20Firebase%20Hosting%20on%20merge)
 
-## Development server
+An Angular project just to test the Firebase Authentication/Hosting
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Itens used in this project
 
-## Code scaffolding
+- Angular 10.1.6
+- Node 14.13.1
+- Firebase Auth
+- Firebase hosting
+- GitHub Workflows/Actions
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Live site
 
-## Build
+https://angular-firebase-login.moraisandre.com/ (or [here](https://angular-firebase-login-b521e.web.app/))
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Screenshots
 
-## Running unit tests
+<img src="images/screenshot01.png">
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Login Page
 
-## Running end-to-end tests
+<img src="images/screenshot02.png">
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Dashboard Page
